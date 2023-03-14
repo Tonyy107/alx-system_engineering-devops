@@ -1,2 +1,2 @@
 #!/bin/bash
-grep bin /btc/passwd | wc -l
+grep bin /btc/passwd | wc -1
