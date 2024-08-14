@@ -19,7 +19,7 @@ def number_of_subscribers(subreddit):
         allow_redirects=False
     )
 
-    if req.status_code == 200:
-        return req.json().get("data", {}).get("subscribers", 0)
-    else:
+    if req.status_code == 404:
         return 0
+    else:
+        return req.json().get("data", {}).get("subscribers", 0)
