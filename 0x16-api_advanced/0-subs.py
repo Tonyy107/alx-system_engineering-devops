@@ -16,7 +16,7 @@ def number_of_subscribers(subreddit):
     headers = {"User-Agent": "api_advanced/1.0.0 (by u/tony107)"}
     req = requests.get(url, headers, allow_redirects=False)
 
-    if req.status_code in (404, 302):
+    if req.status_code >= 300:
         return 0
     else:
         return req.json().get("data", {}).get("subscribers", 0)
