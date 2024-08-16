@@ -13,12 +13,20 @@ def number_of_subscribers(subreddit):
         if the request fails or the subreddit does not exist.
     """
 
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {"User-Agent": "api_advanced (by u/tony107)"}
+
     try:
-        url = f"https://www.reddit.com/r/{subreddit}/about.json"
-        headers = {"User-Agent": "api_advanced/1.0.0 (by u/tony107)"}
-        req = requests.get(url, headers, allow_redirects=False)
-        if req.status_code >= 300:
+
+        response = requests.get(url, headers=headers, allow_redirects=False)
+
+        if response.status_code == 200:
+
+            return response.json().get("data", {}).get("subscribers", 0)
+        elif response.status_code in (302, 404):
+
             return 0
-        return req.json().get("data").get("subscribers")
+        else:
+            return 0
     except requests.RequestException:
         return 0
