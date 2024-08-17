@@ -10,7 +10,7 @@ if __name__ == "__main__":
         f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
     ids = url.json()
     name = ids["name"]
-    print(f"Employee {name} is done with tasks", end="")
+    print("Employee {} is done with tasks".format(name), end="")
     url2 = requests.get(
         f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
     tasks = url2.json()
