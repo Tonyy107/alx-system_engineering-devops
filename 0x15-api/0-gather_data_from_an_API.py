@@ -16,7 +16,7 @@ if __name__ == "__main__":
     com = []
     for task in tasks:
 
-        if task.get("completed") == True:
+        if task.get("completed") is True:
             com.append(task)
     print(f"({len(com)}/{len(tasks)}):")
 
