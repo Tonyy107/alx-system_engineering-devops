@@ -1,30 +1,25 @@
 #!/usr/bin/python3
-""" api hoho """
+""" API Output Checker """
 import requests
 import sys
 
 if __name__ == "__main__":
 
-    # استرجاع معلومات المستخدم باستخدام المعرف المدخل
-    url = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
-    ids = url.json()
-    name = ids["name"]
+    user_id = sys.argv[1]
+    user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    todos_url = f"https://jsonplaceholder.typicode.com/todos?userId={user_id}"
 
-    # استرجاع المهام الخاصة بالمستخدم
-    url2 = requests.get(
-        f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
-    tasks = url2.json()
+    user_resp = requests.get(user_url).json()
+    todos_resp = requests.get(todos_url).json()
 
-    # تصفية المهام المكتملة
-    com = []
-    for task in tasks:
-        if task["completed"]:
-            com.append(task)
+    name = user_resp["name"]
 
-    # طباعة الإخراج المطلوب
-    print(f"Employee {name} is done with tasks({len(com)}/{len(tasks)}):")
+    completed_tasks = [task["title"]
+                       for task in todos_resp if task["completed"]]
+    total_tasks = len(todos_resp)
 
-    for task in com:
-        task_title = task["title"]
-        print(f"\t {task_title}")
+    print(
+        f"Employee {name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+
+    for task in completed_tasks:
+        print(f"\t {task}")
