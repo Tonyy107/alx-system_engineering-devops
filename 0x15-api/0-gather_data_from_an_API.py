@@ -3,22 +3,28 @@
 import requests
 import sys
 
-
 if __name__ == "__main__":
 
+    # استرجاع معلومات المستخدم باستخدام المعرف المدخل
     url = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
     ids = url.json()
-    print("Employee {} is done with tasks".format(ids.get('name')), end="")
+    name = ids["name"]
+
+    # استرجاع المهام الخاصة بالمستخدم
     url2 = requests.get(
         f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
     tasks = url2.json()
+
+    # تصفية المهام المكتملة
     com = []
     for task in tasks:
-
-        if task["completed"] is True:
+        if task["completed"]:
             com.append(task)
-    print("({}/{}):".format(len(com), len(tasks)))
+
+    # طباعة الإخراج المطلوب
+    print(f"Employee {name} is done with tasks({len(com)}/{len(tasks)}):")
 
     for task in com:
-        print("\t {}".format(task.get("title")))
+        task_title = task["title"]
+        print(f"\t {task_title}")
