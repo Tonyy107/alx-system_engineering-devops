@@ -9,7 +9,7 @@ if __name__ == "__main__":
     url = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
     ids = url.json()
-    name = ids.get("name")
+    name = ids["name"]
     print(f"Employee {name} is done with tasks", end="")
     url2 = requests.get(
         f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
@@ -17,10 +17,10 @@ if __name__ == "__main__":
     com = []
     for task in tasks:
 
-        if task.get("completed") is True:
+        if task["completed"] is True:
             com.append(task)
     print(f"({len(com)}/{len(tasks)}):")
 
     for task in com:
-        task = task.get("title")
+        task = task["title"]
         print(f"\t{task}")
