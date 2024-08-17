@@ -9,7 +9,8 @@ if __name__ == "__main__":
     url = requests.get(
         f"https://jsonplaceholder.typicode.com/users/{sys.argv[1]}")
     ids = url.json()
-    print(f"Employee {ids.get('name')} is done with tasks", end="")
+    name = ids.get("name")
+    print(f"Employee {name} is done with tasks", end="")
     url2 = requests.get(
         f"https://jsonplaceholder.typicode.com/todos?userId={sys.argv[1]}")
     tasks = url2.json()
