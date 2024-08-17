@@ -18,8 +18,8 @@ if __name__ == "__main__":
                        for task in todos_resp if task["completed"]]
     total_tasks = len(todos_resp)
 
-    print(
-        f"Employee {name} is done with tasks({len(completed_tasks)}/{total_tasks}):")
+    print(f"Employee {name} is done with tasks\
+({len(completed_tasks)}/{total_tasks}):")
 
     for task in completed_tasks:
         print(f"\t {task}")
