@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ api hoho """
-import sys
 import requests
+import sys
+
 
 if __name__ == "__main__":
 
